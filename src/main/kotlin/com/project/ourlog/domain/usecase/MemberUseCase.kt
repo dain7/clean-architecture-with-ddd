@@ -4,5 +4,5 @@ import org.springframework.stereotype.Component
 
 @Component
 interface MemberUseCase {
-    fun signUp()
+    fun signUp(name: String) : Long
 }
