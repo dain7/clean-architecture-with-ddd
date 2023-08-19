@@ -1,11 +1,17 @@
 package com.project.ourlog.domain.entity
 
-class Member(
-        val name : String
-) {
+import com.project.ourlog.domain.repository.DateRepository
+import com.project.ourlog.domain.repository.MemberRepository
 
-    fun getCalendar() {
+class Member (
+        private val id : Long? = null,
+        private val name : String
+){
+    private lateinit var memberRepository: MemberRepository
+    private lateinit var dateRepository: DateRepository
 
+    fun getCalendar(year: Int, month: Int): List<Date> {
+        return dateRepository.findByMemberIdAndYearAndMonth(id!!, year, month)
     }
 
     fun getDate() {

@@ -5,5 +5,5 @@ import com.project.ourlog.domain.entity.Member
 
 interface MemberRepository {
     fun save(member : Member) : Long
-    fun existMember(member : Member) : Boolean
+    fun findById(memberId : Long) : Member
 }
