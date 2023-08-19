@@ -14,8 +14,8 @@ class Member (
         return dateRepository.findByMemberIdAndYearAndMonth(id!!, year, month)
     }
 
-    fun getDate() {
-
+    fun getDate(year: Int, month: Int, day : Int) : Date {
+        return dateRepository.findByMemberIdAndYearAndMonthAndDay(id!!, year, month, day)
     }
 
     fun addDate() {

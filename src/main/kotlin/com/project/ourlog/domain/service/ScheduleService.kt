@@ -13,4 +13,9 @@ class ScheduleService (
         val member = memberRepository.findById(memberId)
         return member.getCalendar(year, month)
     }
+
+    override fun getDate(memberId: Long, year: Int, month: Int, day: Int): Date {
+        val member = memberRepository.findById(memberId)
+        return member.getDate(year, month, day)
+    }
 }
