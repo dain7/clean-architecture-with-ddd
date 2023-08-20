@@ -22,8 +22,9 @@ class Member (
         return dateRepository.findByMemberIdAndYearAndMonthAndDay(id!!, year, month, day)
     }
 
-    fun addDate() {
-
+    fun addDate(year: Int, month: Int, day : Int, name : String) : Long {
+        val newDate = Date(id!!, year, month, day, name)
+        return dateRepository.save(newDate)
     }
 
     fun searchDate() {

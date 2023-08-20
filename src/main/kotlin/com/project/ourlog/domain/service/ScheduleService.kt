@@ -1,5 +1,6 @@
 package com.project.ourlog.domain.service
 
+import com.project.ourlog.domain.dto.AddDateRequestDto
 import com.project.ourlog.domain.entity.Date
 import com.project.ourlog.domain.repository.DateRepository
 import com.project.ourlog.domain.repository.MemberRepository
@@ -22,5 +23,10 @@ class ScheduleService (
     override fun searchDate(memberId: Long, year: Int, month: Int, day: Int): Date {
         val member = memberRepository.findById(memberId)
         return member.searchDate(year, month, day)
+    }
+
+    override fun addDate(memberId: Long, request: AddDateRequestDto) : Long {
+        val member = memberRepository.findById(memberId)
+        return member.addDate(request.year, request.month, request.day, request.name)
     }
 }
