@@ -7,4 +7,5 @@ interface DateRepository {
     fun findByMemberIdAndYearAndMonthAndDay(memberId : Long, year : Int, month : Int, day : Int) : Date
     fun findById(memberId: Long, dateId: Long) : Date
     fun save(date : Date) : Long
+    fun update(dateId: Long, year : Int, month : Int, day : Int) : Date
 }

@@ -27,10 +27,6 @@ class Member (
         return dateRepository.save(newDate)
     }
 
-    fun searchDate() {
-
-    }
-
     fun getPlace() {
 
     }
