@@ -14,7 +14,11 @@ class Member (
         return dateRepository.findByMemberIdAndYearAndMonth(id!!, year, month)
     }
 
-    fun getDate(year: Int, month: Int, day : Int) : Date {
+    fun getDate(dateId: Long): Date {
+        return dateRepository.findById(id!!, dateId)
+    }
+
+    fun searchDate(year: Int, month: Int, day : Int) : Date {
         return dateRepository.findByMemberIdAndYearAndMonthAndDay(id!!, year, month, day)
     }
 
