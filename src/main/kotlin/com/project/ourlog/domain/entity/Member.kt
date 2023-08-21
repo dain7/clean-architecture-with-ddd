@@ -8,7 +8,6 @@ class Member (
         private val name : String,
         private val id : Long? = null,
 ){
-    private lateinit var memberRepository: MemberRepository
     private lateinit var dateRepository: DateRepository
     private lateinit var placeRepository: PlaceRepository
 
