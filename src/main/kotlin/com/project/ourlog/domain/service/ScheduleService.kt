@@ -45,4 +45,9 @@ class ScheduleService (
         return member.addPlace(date.id!!, request.name, request.location)
     }
 
+    override fun getPlace(memberId: Long, dateId: Long, placeId: Long): Place {
+        val member = memberRepository.findById(memberId).orElseThrow()
+        val date = dateRepository.findById(memberId, dateId).orElseThrow()
+        return member.getPlace(date.id!!, placeId)
+    }
 }

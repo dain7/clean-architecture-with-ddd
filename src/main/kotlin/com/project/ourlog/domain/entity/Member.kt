@@ -29,8 +29,8 @@ class Member (
         return dateRepository.save(newDate)
     }
 
-    fun getPlace() {
-
+    fun getPlace(dateId: Long, placeId: Long) : Place {
+        return placeRepository.findByDateIdAndPlaceId(dateId, placeId).orElseThrow()
     }
 
     fun addPlace(dateId : Long, name : String, location : String) : Place {

@@ -15,4 +15,5 @@ interface ScheduleUseCase {
     fun addDate(memberId : Long, request : AddDateRequestDto): Long
     fun updateDate(memberId: Long, dateId: Long, request : UpdateDateRequestDto) : Date
     fun addPlace(memberId: Long, dateId : Long, request : AddPlaceRequestDto) : Place
+    fun getPlace(memberId : Long, dateId: Long, placeId: Long) : Place
 }
