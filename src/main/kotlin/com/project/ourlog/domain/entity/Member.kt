@@ -2,24 +2,26 @@ package com.project.ourlog.domain.entity
 
 import com.project.ourlog.domain.repository.DateRepository
 import com.project.ourlog.domain.repository.MemberRepository
+import com.project.ourlog.domain.repository.PlaceRepository
 
 class Member (
+        private val name : String,
         private val id : Long? = null,
-        private val name : String
 ){
     private lateinit var memberRepository: MemberRepository
     private lateinit var dateRepository: DateRepository
+    private lateinit var placeRepository: PlaceRepository
 
     fun getCalendar(year: Int, month: Int): List<Date> {
         return dateRepository.findByMemberIdAndYearAndMonth(id!!, year, month)
     }
 
     fun getDate(dateId: Long): Date {
-        return dateRepository.findById(id!!, dateId)
+        return dateRepository.findById(id!!, dateId).orElseThrow()
     }
 
     fun searchDate(year: Int, month: Int, day : Int) : Date {
-        return dateRepository.findByMemberIdAndYearAndMonthAndDay(id!!, year, month, day)
+        return dateRepository.findByMemberIdAndYearAndMonthAndDay(id!!, year, month, day).orElseThrow()
     }
 
     fun addDate(year: Int, month: Int, day : Int, name : String) : Long {
@@ -31,7 +33,8 @@ class Member (
 
     }
 
-    fun addPlace() {
-
+    fun addPlace(dateId : Long, name : String, location : String) : Place {
+        val newPlace = Place(dateId, name, location)
+        return placeRepository.save(newPlace)
     }
 }

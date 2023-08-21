@@ -10,8 +10,6 @@ class MemberService (
 ) : MemberUseCase {
     override fun signUp(name: String): Long {
         val newMember = Member(name)
-        if (memberRepository.existMember(newMember)) fail()
-
         return memberRepository.save(newMember)
     }
 }
