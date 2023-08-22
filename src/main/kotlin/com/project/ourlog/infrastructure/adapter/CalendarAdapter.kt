@@ -8,15 +8,15 @@ import com.project.ourlog.domain.repository.MemberDomainRepository
 import com.project.ourlog.domain.repository.PlaceDomainRepository
 import com.project.ourlog.infrastructure.mapper.DateMapper
 import com.project.ourlog.infrastructure.mapper.MemberMapper
+import com.project.ourlog.infrastructure.mapper.PlaceMapper
 import com.project.ourlog.infrastructure.repository.DateRepository
 import com.project.ourlog.infrastructure.repository.MemberRepository
 import com.project.ourlog.infrastructure.repository.PlaceRepository
-import java.util.*
 
 class CalendarAdapter(
-        val memberRepository: MemberRepository,
-        val dateRepository: DateRepository,
-        val placeRepository: PlaceRepository,
+        private val memberRepository: MemberRepository,
+        private val dateRepository: DateRepository,
+        private val placeRepository: PlaceRepository,
 ) : MemberDomainRepository, DateDomianRepository, PlaceDomainRepository {
 
     // Date
@@ -55,16 +55,21 @@ class CalendarAdapter(
         return MemberMapper.toDomainEntity(newMemberEntity)
     }
 
-    override fun findById(memberId: Long): Optional<Member> {
-        TODO("Not yet implemented")
+    override fun findById(memberId: Long): Member {
+        val memberEntity = memberRepository.findById(memberId).orElseThrow()
+        return MemberMapper.toDomainEntity(memberEntity)
     }
 
+    // Place
     override fun save(place: Place): Place {
-        TODO("Not yet implemented")
+        val dateEntity = dateRepository.findById(place.dateId).orElseThrow()
+        val newPlaceEntityFixture = PlaceMapper.toJpaEntity(dateEntity, place)
+        val newPlaceEntity = placeRepository.save(newPlaceEntityFixture)
+        return PlaceMapper.toDomainEntity(newPlaceEntity)
     }
 
-    override fun findByDateIdAndPlaceId(dateId: Long, placeId: Long): Optional<Place> {
-        TODO("Not yet implemented")
+    override fun findByDateIdAndPlaceId(dateId: Long, placeId: Long): Place {
+        val newPlaceEntity = placeRepository.findByDateEntityIdAndId(dateId, placeId).orElseThrow()
+        return PlaceMapper.toDomainEntity(newPlaceEntity)
     }
-
 }

@@ -6,5 +6,5 @@ import java.util.Optional
 
 interface MemberDomainRepository {
     fun save(member : Member) : Member
-    fun findById(memberId : Long) : Optional<Member>
+    fun findById(memberId : Long) : Member
 }

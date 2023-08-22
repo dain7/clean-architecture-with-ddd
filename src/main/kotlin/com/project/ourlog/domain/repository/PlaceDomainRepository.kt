@@ -5,5 +5,5 @@ import java.util.Optional
 
 interface PlaceDomainRepository {
     fun save(place : Place) : Place
-    fun findByDateIdAndPlaceId(dateId: Long, placeId: Long) : Optional<Place>
+    fun findByDateIdAndPlaceId(dateId: Long, placeId: Long) : Place
 }
