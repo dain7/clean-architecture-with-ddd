@@ -1,7 +1,6 @@
 package com.project.ourlog.infrastructure.mapper
 
 import com.project.ourlog.domain.entity.Date
-import com.project.ourlog.domain.entity.Member
 import com.project.ourlog.infrastructure.entity.DateEntity
 import com.project.ourlog.infrastructure.entity.MemberEntity
 

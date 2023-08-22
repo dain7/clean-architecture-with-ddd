@@ -3,6 +3,9 @@ package com.project.ourlog.domain.repository
 import com.project.ourlog.domain.entity.Date
 import org.springframework.stereotype.Component
 
+/**
+ * Repository가 수행해야 할 기능
+ */
 @Component
 interface DateDomainRepository {
     fun findAllByMemberIdAndYearAndMonth(memberId : Long, year : Int, month : Int) : List<Date>

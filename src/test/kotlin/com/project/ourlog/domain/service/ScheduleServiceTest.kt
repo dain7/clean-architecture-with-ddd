@@ -26,9 +26,12 @@ class ScheduleServiceTest {
     @DisplayName("달력 조회 : 성공")
     fun getCalendar() {
         // given
+        val memberId = 1L
+        val year = 2023
+        val month = 8
 
         // when
-
+        scheduleService.getCalendar(memberId, year, month)
         // then
     }
 }

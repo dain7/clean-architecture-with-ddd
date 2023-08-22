@@ -8,6 +8,9 @@ import com.project.ourlog.domain.entity.Date
 import com.project.ourlog.domain.entity.Place
 import org.springframework.stereotype.Component
 
+/**
+ * 시스템이 수행해야 할 비즈니스 유즈케이스 정의
+ */
 @Component
 interface ScheduleUseCase {
     fun getCalendar(memberId: Long, year: Int, month: Int): List<Date>

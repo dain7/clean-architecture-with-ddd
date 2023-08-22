@@ -14,8 +14,10 @@ import com.project.ourlog.infrastructure.repository.MemberRepository
 import com.project.ourlog.infrastructure.repository.PlaceRepository
 import org.springframework.stereotype.Component
 
+/**
+ * 도메인 내 Repository와 실제 JPA Repository를 이어주는 역할을 수행
+ */
 @Component
-
 class CalendarAdapter(
         private val memberRepository: MemberRepository,
         private val dateRepository: DateRepository,

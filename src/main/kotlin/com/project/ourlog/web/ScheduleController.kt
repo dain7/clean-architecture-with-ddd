@@ -8,6 +8,9 @@ import com.project.ourlog.web.protocol.request.*
 import com.project.ourlog.web.protocol.response.*
 import org.springframework.web.bind.annotation.*
 
+/**
+ * 컨트롤러 정의
+ */
 @RestController
 class ScheduleController(
         private val scheduleUseCase: ScheduleUseCase,
