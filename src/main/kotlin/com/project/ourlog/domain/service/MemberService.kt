@@ -3,7 +3,9 @@ package com.project.ourlog.domain.service
 import com.project.ourlog.domain.entity.Member
 import com.project.ourlog.domain.repository.MemberDomainRepository
 import com.project.ourlog.domain.usecase.MemberUseCase
+import org.springframework.stereotype.Service
 
+@Service
 class MemberService (
         private val memberDomainRepository : MemberDomainRepository
 ) : MemberUseCase {

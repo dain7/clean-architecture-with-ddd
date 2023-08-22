@@ -1,7 +1,6 @@
 package com.project.ourlog.infrastructure.entity
 
 import jakarta.persistence.*
-import org.springframework.data.annotation.Id
 
 @Entity
 class MemberEntity(

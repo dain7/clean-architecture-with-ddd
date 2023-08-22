@@ -3,7 +3,7 @@ package com.project.ourlog.infrastructure.adapter
 import com.project.ourlog.domain.entity.Date
 import com.project.ourlog.domain.entity.Member
 import com.project.ourlog.domain.entity.Place
-import com.project.ourlog.domain.repository.DateDomianRepository
+import com.project.ourlog.domain.repository.DateDomainRepository
 import com.project.ourlog.domain.repository.MemberDomainRepository
 import com.project.ourlog.domain.repository.PlaceDomainRepository
 import com.project.ourlog.infrastructure.mapper.DateMapper
@@ -12,26 +12,29 @@ import com.project.ourlog.infrastructure.mapper.PlaceMapper
 import com.project.ourlog.infrastructure.repository.DateRepository
 import com.project.ourlog.infrastructure.repository.MemberRepository
 import com.project.ourlog.infrastructure.repository.PlaceRepository
+import org.springframework.stereotype.Component
+
+@Component
 
 class CalendarAdapter(
         private val memberRepository: MemberRepository,
         private val dateRepository: DateRepository,
         private val placeRepository: PlaceRepository,
-) : MemberDomainRepository, DateDomianRepository, PlaceDomainRepository {
+) : MemberDomainRepository, DateDomainRepository, PlaceDomainRepository {
 
     // Date
     override fun findAllByMemberIdAndYearAndMonth(memberId: Long, year: Int, month: Int): List<Date> {
-        val dateEntitis = dateRepository.findAllByMemberIdAndYearAndMonth(memberId, year, month)
+        val dateEntitis = dateRepository.findAllByMemberEntityIdAndYearAndMonth(memberId, year, month)
         return dateEntitis.map { dateEntity ->  DateMapper.toDomainEntity(dateEntity) }
     }
 
     override fun findByMemberIdAndYearAndMonthAndDay(memberId: Long, year: Int, month: Int, day: Int): Date {
-        val dateEntity = dateRepository.findByMemberIdAndYearAndMonthAndDay(memberId, year, month, day).orElseThrow()
+        val dateEntity = dateRepository.findByMemberEntityIdAndYearAndMonthAndDay(memberId, year, month, day).orElseThrow()
         return DateMapper.toDomainEntity(dateEntity)
     }
 
     override fun findById(memberId: Long, dateId: Long): Date {
-        val dateEntity = dateRepository.findByMemberIdAndId(memberId, dateId).orElseThrow()
+        val dateEntity = dateRepository.findByMemberEntityIdAndId(memberId, dateId).orElseThrow()
         return DateMapper.toDomainEntity(dateEntity)
     }
 

@@ -1,6 +1,6 @@
 package com.project.ourlog.domain.entity
 
-import com.project.ourlog.domain.repository.DateDomianRepository
+import com.project.ourlog.domain.repository.DateDomainRepository
 
 class Date (
         val memberId : Long,
@@ -11,9 +11,9 @@ class Date (
         val id : Long? = null
 ) {
 
-    private lateinit var dateDomianRepository: DateDomianRepository
+    private lateinit var dateDomainRepository: DateDomainRepository
 
     fun update(year : Int, month: Int, day: Int, name: String) : Date {
-        return dateDomianRepository.update(id!!, year, month, day, name)
+        return dateDomainRepository.update(id!!, year, month, day, name)
     }
 }

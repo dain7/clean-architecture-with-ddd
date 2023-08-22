@@ -4,7 +4,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class OurLogApplication
+open class OurLogApplication
 
 fun main(args: Array<String>) {
 	runApplication<OurLogApplication>(*args)
