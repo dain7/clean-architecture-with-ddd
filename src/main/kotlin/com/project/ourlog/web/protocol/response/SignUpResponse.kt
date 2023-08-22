@@ -1,6 +1,6 @@
 package com.project.ourlog.web.protocol.response
 
-class SignUpResponse (
+data class SignUpResponse (
         var id : Long,
         var name : String
 ){
