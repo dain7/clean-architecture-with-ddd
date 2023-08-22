@@ -3,36 +3,56 @@ package com.project.ourlog.infrastructure.adapter
 import com.project.ourlog.domain.entity.Date
 import com.project.ourlog.domain.entity.Member
 import com.project.ourlog.domain.entity.Place
-import com.project.ourlog.domain.repository.DateRepository
-import com.project.ourlog.domain.repository.MemberRepository
-import com.project.ourlog.domain.repository.PlaceRepository
+import com.project.ourlog.domain.repository.DateDomianRepository
+import com.project.ourlog.domain.repository.MemberDomainRepository
+import com.project.ourlog.domain.repository.PlaceDomainRepository
+import com.project.ourlog.infrastructure.mapper.DateMapper
+import com.project.ourlog.infrastructure.mapper.MemberMapper
+import com.project.ourlog.infrastructure.repository.DateRepository
+import com.project.ourlog.infrastructure.repository.MemberRepository
+import com.project.ourlog.infrastructure.repository.PlaceRepository
 import java.util.*
 
 class CalendarAdapter(
+        val memberRepository: MemberRepository,
+        val dateRepository: DateRepository,
+        val placeRepository: PlaceRepository,
+) : MemberDomainRepository, DateDomianRepository, PlaceDomainRepository {
 
-) : MemberRepository, DateRepository, PlaceRepository {
-    override fun findByMemberIdAndYearAndMonth(memberId: Long, year: Int, month: Int): List<Date> {
-        TODO("Not yet implemented")
+    // Date
+    override fun findAllByMemberIdAndYearAndMonth(memberId: Long, year: Int, month: Int): List<Date> {
+        val dateEntitis = dateRepository.findAllByMemberIdAndYearAndMonth(memberId, year, month)
+        return dateEntitis.map { dateEntity ->  DateMapper.toDomainEntity(dateEntity) }
     }
 
-    override fun findByMemberIdAndYearAndMonthAndDay(memberId: Long, year: Int, month: Int, day: Int): Optional<Date> {
-        TODO("Not yet implemented")
+    override fun findByMemberIdAndYearAndMonthAndDay(memberId: Long, year: Int, month: Int, day: Int): Date {
+        val dateEntity = dateRepository.findByMemberIdAndYearAndMonthAndDay(memberId, year, month, day).orElseThrow()
+        return DateMapper.toDomainEntity(dateEntity)
     }
 
-    override fun findById(memberId: Long, dateId: Long): Optional<Date> {
-        TODO("Not yet implemented")
+    override fun findById(memberId: Long, dateId: Long): Date {
+        val dateEntity = dateRepository.findByMemberIdAndId(memberId, dateId).orElseThrow()
+        return DateMapper.toDomainEntity(dateEntity)
     }
 
-    override fun save(date: Date): Long {
-        TODO("Not yet implemented")
+    override fun save(date: Date): Date {
+        val memberEntity = memberRepository.findById(date.memberId).orElseThrow()
+        val newDateEntityFixture = DateMapper.toJpaEntity(memberEntity, date)
+        val newDateEntity = dateRepository.save(newDateEntityFixture)
+        return DateMapper.toDomainEntity(newDateEntity)
     }
 
-    override fun update(dateId: Long, year: Int, month: Int, day: Int): Date {
-        TODO("Not yet implemented")
+    override fun update(dateId: Long, year: Int, month: Int, day: Int, name: String): Date {
+        val dateEntity = dateRepository.findById(dateId).orElseThrow();
+        dateEntity.update(year, month, day, name)
+        return DateMapper.toDomainEntity(dateEntity)
     }
 
-    override fun save(member: Member): Long {
-        TODO("Not yet implemented")
+    // Member
+    override fun save(member: Member): Member {
+        val newMemberEntityFixture = MemberMapper.toJpaEntity(member)
+        val newMemberEntity = memberRepository.save(newMemberEntityFixture)
+        return MemberMapper.toDomainEntity(newMemberEntity)
     }
 
     override fun findById(memberId: Long): Optional<Member> {

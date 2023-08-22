@@ -4,11 +4,11 @@ import jakarta.persistence.*
 import org.springframework.data.annotation.Id
 
 @Entity
-class Member(
+class MemberEntity(
         val name : String,
 
-        @OneToMany(mappedBy = "member", cascade = [CascadeType.ALL], orphanRemoval = true)
-        val dates : MutableList<Date> = mutableListOf(),
+        @OneToMany(mappedBy = "memberEntity", cascade = [CascadeType.ALL], orphanRemoval = true)
+        val dateEntities : MutableList<DateEntity> = mutableListOf(),
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)

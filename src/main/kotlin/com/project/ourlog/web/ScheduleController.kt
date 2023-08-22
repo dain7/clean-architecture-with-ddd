@@ -19,8 +19,8 @@ class ScheduleController(
     fun signUp(
             @RequestBody signUpRequest: SignUpRequest
     ) : CommonResponse<SignUpResponse> {
-        val memberId = memberUseCase.signUp(signUpRequest.name)
-        val data = SignUpResponse(memberId)
+        val member = memberUseCase.signUp(signUpRequest.name)
+        val data = SignUpResponse(member.id!!, member.name)
         return CommonResponse(Status.SUCCESS, data)
     }
 

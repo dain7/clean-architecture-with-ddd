@@ -1,15 +1,14 @@
 package com.project.ourlog.domain.service
 
 import com.project.ourlog.domain.entity.Member
-import com.project.ourlog.domain.repository.MemberRepository
+import com.project.ourlog.domain.repository.MemberDomainRepository
 import com.project.ourlog.domain.usecase.MemberUseCase
-import com.project.ourlog.utils.fail
 
 class MemberService (
-        private val memberRepository : MemberRepository
+        private val memberDomainRepository : MemberDomainRepository
 ) : MemberUseCase {
-    override fun signUp(name: String): Long {
+    override fun signUp(name: String): Member {
         val newMember = Member(name)
-        return memberRepository.save(newMember)
+        return memberDomainRepository.save(newMember)
     }
 }

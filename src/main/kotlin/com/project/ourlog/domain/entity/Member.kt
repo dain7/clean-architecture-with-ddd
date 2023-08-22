@@ -1,39 +1,38 @@
 package com.project.ourlog.domain.entity
 
-import com.project.ourlog.domain.repository.DateRepository
-import com.project.ourlog.domain.repository.MemberRepository
-import com.project.ourlog.domain.repository.PlaceRepository
+import com.project.ourlog.domain.repository.DateDomianRepository
+import com.project.ourlog.domain.repository.PlaceDomainRepository
 
 class Member (
-        private val name : String,
-        private val id : Long? = null,
+        val name : String,
+        val id : Long? = null,
 ){
-    private lateinit var dateRepository: DateRepository
-    private lateinit var placeRepository: PlaceRepository
+    private lateinit var dateDomianRepository: DateDomianRepository
+    private lateinit var placeDomainRepository: PlaceDomainRepository
 
     fun getCalendar(year: Int, month: Int): List<Date> {
-        return dateRepository.findByMemberIdAndYearAndMonth(id!!, year, month)
+        return dateDomianRepository.findAllByMemberIdAndYearAndMonth(id!!, year, month)
     }
 
     fun getDate(dateId: Long): Date {
-        return dateRepository.findById(id!!, dateId).orElseThrow()
+        return dateDomianRepository.findById(id!!, dateId)
     }
 
     fun searchDate(year: Int, month: Int, day : Int) : Date {
-        return dateRepository.findByMemberIdAndYearAndMonthAndDay(id!!, year, month, day).orElseThrow()
+        return dateDomianRepository.findByMemberIdAndYearAndMonthAndDay(id!!, year, month, day)
     }
 
-    fun addDate(year: Int, month: Int, day : Int, name : String) : Long {
+    fun addDate(year: Int, month: Int, day : Int, name : String) : Date {
         val newDate = Date(id!!, year, month, day, name)
-        return dateRepository.save(newDate)
+        return dateDomianRepository.save(newDate)
     }
 
     fun getPlace(dateId: Long, placeId: Long) : Place {
-        return placeRepository.findByDateIdAndPlaceId(dateId, placeId).orElseThrow()
+        return placeDomainRepository.findByDateIdAndPlaceId(dateId, placeId).orElseThrow()
     }
 
     fun addPlace(dateId : Long, name : String, location : String) : Place {
         val newPlace = Place(dateId, name, location)
-        return placeRepository.save(newPlace)
+        return placeDomainRepository.save(newPlace)
     }
 }

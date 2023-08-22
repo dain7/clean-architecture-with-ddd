@@ -8,9 +8,9 @@ import org.springframework.data.annotation.Id
 
 
 @Entity
-class Place (
+class PlaceEntity (
         @ManyToOne
-        val date : Date,
+        val dateEntity : DateEntity,
 
         val name : String,
         val location : String,

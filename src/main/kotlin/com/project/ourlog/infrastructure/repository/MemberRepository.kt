@@ -1,7 +1,7 @@
 package com.project.ourlog.infrastructure.repository
 
-import com.project.ourlog.domain.entity.Member
+import com.project.ourlog.infrastructure.entity.MemberEntity
 import org.springframework.data.jpa.repository.JpaRepository
 
-interface MemberRepository : JpaRepository<Member, Long>{
+interface MemberRepository : JpaRepository<MemberEntity, Long>{
 }
