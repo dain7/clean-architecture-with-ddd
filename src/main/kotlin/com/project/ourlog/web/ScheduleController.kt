@@ -4,10 +4,7 @@ import com.project.ourlog.domain.dto.AddDateRequestDto
 import com.project.ourlog.domain.usecase.MemberUseCase
 import com.project.ourlog.domain.usecase.ScheduleUseCase
 import com.project.ourlog.utils.Status
-import com.project.ourlog.web.protocol.request.AddDateRequest
-import com.project.ourlog.web.protocol.request.SearchDateRequest
-import com.project.ourlog.web.protocol.request.SignUpRequest
-import com.project.ourlog.web.protocol.request.UpdateDateRequest
+import com.project.ourlog.web.protocol.request.*
 import com.project.ourlog.web.protocol.response.*
 import org.springframework.web.bind.annotation.*
 
@@ -67,7 +64,7 @@ class ScheduleController(
         return CommonResponse(Status.SUCCESS, data)
     }
 
-    @PostMapping("/api/member/{member_id}/date/{date_id}")
+    @PutMapping("/api/member/{member_id}/date/{date_id}")
     fun updateDate(
             @PathVariable("member_id") memberId: Long,
             @PathVariable("date_id") dateId: Long,
@@ -75,6 +72,28 @@ class ScheduleController(
     ) : CommonResponse<UpdateDateResponse> {
         val date = scheduleUseCase.updateDate(memberId, dateId, updateDateRequest.request)
         val data = UpdateDateResponse(date)
+        return CommonResponse(Status.SUCCESS, data)
+    }
+
+    @PostMapping("/api/member/{member_id}/date/{date_id}/place")
+    fun addPlace(
+            @PathVariable("member_id") memberId: Long,
+            @PathVariable("date_id") dateId: Long,
+            @RequestBody addPlaceRequest: AddPlaceRequest
+    ) : CommonResponse<AddPlaceResponse> {
+        val place = scheduleUseCase.addPlace(memberId, dateId, addPlaceRequest.request)
+        val data = AddPlaceResponse(place)
+        return CommonResponse(Status.SUCCESS, data)
+    }
+
+    @GetMapping("/api/member/{member_id}/date/{date_id}/place/{place_id}")
+    fun getPlace(
+            @PathVariable("member_id") memberId: Long,
+            @PathVariable("date_id") dateId: Long,
+            @PathVariable("place_id") placeId: Long,
+    ) : CommonResponse<GetPlaceResponse> {
+        val place = scheduleUseCase.getPlace(memberId, dateId, placeId)
+        val data = GetPlaceResponse(place)
         return CommonResponse(Status.SUCCESS, data)
     }
 }
