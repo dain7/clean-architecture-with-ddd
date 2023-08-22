@@ -8,8 +8,13 @@ class DateEntity (
         @ManyToOne
         val memberEntity : MemberEntity,
 
+        @Column(name="_year")
         var year : Int,
+
+        @Column(name="_month")
         var month : Int,
+
+        @Column(name="_day")
         var day : Int,
         var name : String,
 
