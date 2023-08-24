@@ -10,4 +10,5 @@ import org.springframework.stereotype.Component
 interface PlaceDomainRepository {
     fun save(place : Place) : Place
     fun findByDateIdAndPlaceId(dateId: Long, placeId: Long) : Place
+    fun update(placeId: Long, name: String, location: String) : Place
 }
