@@ -31,7 +31,9 @@ class ScheduleServiceTest {
         val month = 8
 
         // when
-        scheduleService.getCalendar(memberId, year, month)
+        val calendar = scheduleService.getCalendar(memberId, year, month)
+
         // then
+
     }
 }

@@ -77,4 +77,10 @@ class CalendarAdapter(
         val newPlaceEntity = placeRepository.findByDateEntityIdAndId(dateId, placeId).orElseThrow()
         return PlaceMapper.toDomainEntity(newPlaceEntity)
     }
+
+    override fun update(placeId: Long, name: String, location: String): Place {
+        val placeEntity = placeRepository.findById(placeId).orElseThrow()
+        placeEntity.update(name, location)
+        return PlaceMapper.toDomainEntity(placeEntity)
+    }
 }
