@@ -10,3 +10,6 @@
 domain:
 infra:
 web:
+
+## 클린 아키텍처 개념 
+https://cowimming.tistory.com/277
